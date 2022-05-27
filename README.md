@@ -21,7 +21,7 @@
 
 # Movie-Theater-UI
 This application was built with the idea of recreating populer movie theater applications out in th eindustry today. So far the UI contains 
-Login with authentication and a sign up form. The functionality allows users to create a account with selected information and use that 
+Login with authentication and a sign up form. The functionality allows users to create an account with selected information and use that 
 information to login with some basic authentication.
 
 
