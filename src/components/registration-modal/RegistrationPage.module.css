@@ -1,0 +1,200 @@
+.modalBackground {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	margin: auto;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.792);
+	z-index: 700;
+	overflow-y: auto;
+}
+
+.modalContainer {
+	position: relative;
+	width: 25%;
+	height: 100%;
+	margin-top: 8em;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 10em;
+}
+
+.modal {
+    position: absolute;
+	transform: translateX(50%);
+	padding-left:.5em;
+	padding-right:.5em;
+	margin-left:auto;
+	margin-right:auto;
+	right:50%;
+	background-color: white;	
+	z-index: 800;
+	width: 100%;
+	height: fit-content;
+	border-radius: .2em;
+    display: flex;
+    flex-direction: column;
+	box-shadow: .5em .5em .5em rgba(0, 0, 0, 0.651);
+}
+
+.title {
+	margin: .5em 0;
+	margin-bottom: 1.5em;
+	text-align: center;
+	font-size: 2em;
+    font-weight: 630;
+}
+
+.loginField {   
+	margin: auto; 
+	margin-bottom: 1.5em;
+}
+
+.label {
+	padding: 0;
+	margin: 0;
+	margin-bottom: .5em;
+	font-size:1.34em;
+    font-weight: 425;
+}
+
+.input {
+	width: 28em;
+	height: 3.5em;
+    border: solid .14em grey;
+	border-radius: .2em;
+	padding-left: 1em;
+}
+
+.passwordInput {
+	position: relative;
+}
+
+.passwordIcon {
+    position: absolute;
+	border: none;
+
+	background-color: none;
+    height: 1.4rem;
+    top: 45%;
+    right: .5em;
+    transform: translateY(-50%);
+    background: 0 0;
+	cursor: pointer;
+}
+
+.closeContainer {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.close {
+	border: none;
+	background: none;
+	font-size: 1.5em;
+	margin-top: .5em;
+	margin-right: .3em;
+	cursor: pointer;
+}
+
+.checkFieldContainer {
+	margin-top: .8em;
+}
+
+.checkboxField {
+	width: 75%;
+	margin: auto;
+	margin-bottom: 1.5em;
+}
+
+.checkboxContainer {
+	display: flex;
+	flex-direction: row
+}
+
+.checkbox {
+	width: 1.7em;
+	height: 1.7em;  
+	border-radius: 50%;
+	transition: box-shadow .3s;
+	background: white;
+	cursor: pointer;
+	border: solid 0.15em grey;
+	appearance: none;
+}
+
+.checkbox:checked { 
+	box-shadow: inset 0 0 0 20px rgb(255, 120, 0)
+  }
+
+.checkboxText {
+	margin: 0 .5em;
+	font-size: 1.2em;
+}
+
+.buttonContainer {
+	margin: auto;	
+	margin-top: .5em;
+}
+
+.registerButton {
+	width: 28em;
+	height: 3.5em;
+	background-color: rgb(255, 120, 0);
+	border: none;
+	border-radius: .5em;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+	margin-top: .6em;
+	margin-bottom: 2em;
+}
+
+.buttonText {
+	color: rgb(255, 255, 255);
+	font-size: 1.3em;
+    font-weight: 600;
+}
+
+.registerButton:hover {
+	transform: scale(1.04);
+	background-color: rgb(212, 99, 0);
+}
+
+
+.errorField {
+	margin: auto;
+}
+
+.errorText {
+	color: red;
+	margin: 0;
+	margin-bottom: .1em;
+}
+
+.errorField > label > input {
+	border-color: red;
+}
+
+.errorField > label > div > input {
+	border-color: red;
+}
+
+.apiError {
+	color: rgb(255, 120, 0);
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 500;
+	margin: 0;
+	margin-bottom: 1.5em;
+}
+
+.titleError {
+	margin: .5em 0;
+	margin-bottom: .5em;
+	text-align: center;
+	font-size: 2em;
+    font-weight: 630;
+}

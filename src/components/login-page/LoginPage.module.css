@@ -1,0 +1,126 @@
+.pageContainer {
+	width: 100%;
+}
+.login {
+    margin: 5em auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+	margin: .5em 0;
+	margin-bottom: 1.5em;
+	text-align: center;
+	font-size: 2em;
+    font-weight: 630;
+}
+
+.loginField {   
+	margin: auto; 
+	margin-bottom: 1.5em;
+}
+
+.label {
+	padding: 0;
+	margin: 0;
+	margin-bottom: .5em;
+	font-size:1.34em;
+    font-weight: 425;
+}
+
+.input {
+	width: 28em;
+	height: 3.5em;
+    border: solid .14em grey;
+	border-radius: .2em;
+	padding-left: 1em;
+}
+
+.passwordInput {
+	position: relative;
+}
+
+.passwordIcon {
+    position: absolute;
+	border: none;
+
+	background-color: none;
+    height: 1.4rem;
+    top: 45%;
+    right: .5em;
+    transform: translateY(-50%);
+    background: 0 0;
+	cursor: pointer;
+}
+
+.buttonContainer {
+	margin: auto;	
+	margin-top: .5em;
+}
+
+.loginButton {
+	width: 28em;
+	height: 3.5em;
+	background-color: rgb(255, 120, 0);
+	border: none;
+	border-radius: .5em;
+	cursor: pointer;
+	transition: all .2s ease-in-out;
+}
+
+.buttonText {
+	color: rgb(255, 255, 255);
+	font-size: 1.3em;
+    font-weight: 600;
+}
+
+.loginButton:hover {
+	transform: scale(1.04);
+	background-color: rgb(212, 99, 0);
+}
+
+.linkText {
+	margin: 0;
+}
+
+.linkContainer {
+	margin: auto;
+	margin-top: 1.5em;
+}
+
+.passwordContainer {
+	margin: auto;
+	margin-top: .5em;
+}
+
+.buttonLink {
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+.link {
+	color: rgb(255, 120, 0);
+	font-weight: 600;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+.apiError {
+	color: rgb(255, 120, 0);
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 500;
+	margin: 0;
+	margin-bottom: 1.5em;
+}
+
+.titleError {
+	margin: .5em 0;
+	margin-bottom: .5em;
+	text-align: center;
+	font-size: 2em;
+    font-weight: 630;
+}

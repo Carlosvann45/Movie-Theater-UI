@@ -1,0 +1,30 @@
+.navContainer {
+	width: 100%;
+	position: Sticky;
+	top: 0;
+	z-index: 500;
+}
+
+.content {
+	z-index: 30;
+	background-color: rgb(0, 0, 0);
+	box-shadow: .2em .2em .2em rgba(0, 0, 0, 0.651);
+	padding: .75em 2em;
+	padding-bottom: .8em;
+	display: flex;
+	justify-content: center;
+}
+.link {
+	text-decoration: none;
+	padding:0 0;
+	margin: 0;
+}
+
+.content > .link > h4 {
+	display:inline-block;
+	color: rgb(255, 120, 0);
+	font-size: 2em;
+	font-weight: 450;
+	margin: 0;
+	transform: scale(2, 1);
+}
