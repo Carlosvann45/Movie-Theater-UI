@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import classes from './LoginPage.module.css';
@@ -13,8 +13,6 @@ import useAuth from '../authorization/useAuth';
  */
 const LoginPage = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state.from.pathname || '/account';
   const { setCustomerAuth } = useAuth();
   const [visable, setVisable] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +25,7 @@ const LoginPage = () => {
     const loggedIn = await logInCustomer(signInCreds, setCustomerAuth, setApiError);
 
     if (loggedIn) {
-      navigate(from, { replace: true });
+      navigate('/account', { replace: true });
     }
   };
 
