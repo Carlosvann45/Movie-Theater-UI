@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import classes from './LoginPage.module.css';
 import RegistrationModal from '../registration-modal/RegistrationPage';
-import logInCustomer from './LoginPageService';
+import logInCustomer, { getCustomerInfo } from './LoginPageService';
 import useAuth from '../authorization/useAuth';
 
 /**
@@ -13,7 +13,12 @@ import useAuth from '../authorization/useAuth';
  */
 const LoginPage = () => {
   const navigate = useNavigate();
-  const { setCustomerAuth } = useAuth();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || '/account';
+  const {
+    customerAuth,
+    setCustomerAuth
+  } = useAuth();
   const [visable, setVisable] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [signInCreds, setSignInCreds] = useState({});
@@ -22,10 +27,16 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const loggedIn = await logInCustomer(signInCreds, setCustomerAuth, setApiError);
+    const loggedIn = await logInCustomer(signInCreds, customerAuth, setCustomerAuth, setApiError);
 
     if (loggedIn) {
-      navigate('/account', { replace: true });
+      const gotCustomer = await getCustomerInfo(
+        signInCreds.email, customerAuth, setCustomerAuth, setApiError
+      );
+
+      if (gotCustomer) {
+        navigate(from, { replace: true });
+      }
     }
   };
 

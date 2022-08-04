@@ -17,10 +17,10 @@ const App = () => (
   <Routes>
     <Route path="/" element={<Layout />}>
       {/* Public Routes */}
-      <Route path="/" element={<Home />} />
       <Route path="/login" element={<LoginPage />} />
       {/* Private Routes */}
       <Route element={<RequireAuth />}>
+        <Route path="/" element={<Home />} />
         <Route path="/account" element={<UserProfile />} />
       </Route>
       {/* Catch all other routes */}

@@ -3,6 +3,41 @@ import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/Constants';
 
 /**
+ *@name getCustomerInfo
+ *@description gets customer information from api
+ * @param {String} email email to retrive customer information
+ * @param {Object} customerAuth customer auth context
+ * @param {Function} setCustomerAuth usestate for setting customer info
+ * @returns boolean value for
+ */
+export const getCustomerInfo = async (email, customerAuth, setCustomerAuth, setApiError) => {
+  let customerFetched = false;
+
+  await trackPromise(
+    HttpHelper(`${Constants.CUSTOMERS_ENDPOINT}/${email}`, 'GET')
+      .then((response) => {
+        if (response.status === 200) {
+          customerFetched = true;
+          return response.json();
+        } if (response.status === 401) {
+          setApiError(Constants.UNAUTHORIZED);
+          return response.json();
+        }
+
+        throw new Error();
+      })
+      .then((customer) => {
+        if (customerFetched) {
+          setCustomerAuth({ ...customerAuth, customer: { ...customer } });
+        }
+      })
+      .catch(() => setApiError(Constants.API_ERROR))
+  );
+
+  return customerFetched;
+};
+
+/**
  *
  * @name logInCustomer
  * @description Utilizes HttpHelper to make a post request to register a customer
@@ -12,8 +47,9 @@ import Constants from '../../utils/Constants';
  */
 const logInCustomer = async (signInCreds, setCustomerAuth, setApiError) => {
   let customerLoggedIn = false;
+
   await trackPromise(
-    HttpHelper(`${Constants.CUSTOMER_LOG_IN_ENDPOINT}?email=${signInCreds.email}&password=${signInCreds.password}`, 'GET')
+    HttpHelper(Constants.CUSTOMER_LOG_IN_ENDPOINT, 'POST', signInCreds)
       .then((response) => {
         if (response.status === 200) {
           customerLoggedIn = true;
@@ -27,17 +63,17 @@ const logInCustomer = async (signInCreds, setCustomerAuth, setApiError) => {
         }
         throw new Error();
       })
-      .then((response) => {
-        // TODO: add role based functionality and such later
+      .then(async (tokens) => {
         if (customerLoggedIn) {
-          setCustomerAuth({
-            user: response.user,
-            token: response.token
-          });
+          sessionStorage.setItem('accessToken', tokens.accessToken);
+          sessionStorage.setItem('refresherToken', tokens.refresherToken);
+
+          setCustomerAuth({ ...tokens });
         }
       })
       .catch(() => setApiError(Constants.API_ERROR))
   );
+
   return customerLoggedIn;
 };
 
