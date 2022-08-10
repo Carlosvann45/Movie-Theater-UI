@@ -1,4 +1,16 @@
 import Constants from './Constants';
+import DecodeCookie from './cookies/DecodeCookie';
+
+const GetToken = () => {
+  const cookie = DecodeCookie();
+  const useRefresher = sessionStorage.getItem("useAccessToken");
+
+  if (useRefresher != null && useRefresher === ' true') {
+	
+  }
+
+  return cookie?.tokens?.accessToken;
+};
 
 /**
  * @name HttpHelper
@@ -11,7 +23,7 @@ import Constants from './Constants';
 export default (route, method, payload) => fetch(Constants.BASE_URL_API + route, {
   method,
   headers: {
-    Authorization: `Bearer ${sessionStorage.getItem('accessToken')}`,
+    Authorization: `Bearer ${GetToken()}`,
     'Content-Type': 'application/json'
   },
   body: JSON.stringify(payload)

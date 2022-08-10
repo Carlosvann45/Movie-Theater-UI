@@ -1,6 +1,28 @@
 import { trackPromise } from 'react-promise-tracker';
 import HttpHelper from '../../utils/HttpHelper';
 import Constants from '../../utils/Constants';
+import EncodeCookie from '../../utils/cookies/EncodeCookie';
+
+export const refreshCustomerToken = async (refresherToken, customerAuth, setCustomerAuth) => {
+  await trackPromise(
+    HttpHelper(Constants.REFRESH_TOKEN_ENDPOINT, 'GET', '', refresherToken)
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        }
+
+        throw new Error();
+      })
+      .then((tokens) => {
+        setCustomerAuth({ ...customerAuth, tokens: { ...tokens } });
+        EncodeCookie({
+          customer: '',
+          tokens
+        });
+      })
+      .catch(() => {})
+  );
+};
 
 /**
  *@name getCustomerInfo
@@ -29,6 +51,11 @@ export const getCustomerInfo = async (email, customerAuth, setCustomerAuth, setA
       .then((customer) => {
         if (customerFetched) {
           setCustomerAuth({ ...customerAuth, customer: { ...customer } });
+          EncodeCookie({
+            customer,
+            tokens: {},
+            getTokens: true
+          });
         }
       })
       .catch(() => setApiError(Constants.API_ERROR))
@@ -45,7 +72,7 @@ export const getCustomerInfo = async (email, customerAuth, setCustomerAuth, setA
  * @param {Function} setApiError sets error if response is not 201 created
  * @returns boolean vlaue based on if a user was updated
  */
-const logInCustomer = async (signInCreds, setCustomerAuth, setApiError) => {
+const logInCustomer = async (signInCreds, customerAuth, setCustomerAuth, setApiError) => {
   let customerLoggedIn = false;
 
   await trackPromise(
@@ -63,12 +90,14 @@ const logInCustomer = async (signInCreds, setCustomerAuth, setApiError) => {
         }
         throw new Error();
       })
-      .then(async (tokens) => {
+      .then((tokens) => {
         if (customerLoggedIn) {
-          sessionStorage.setItem('accessToken', tokens.accessToken);
-          sessionStorage.setItem('refresherToken', tokens.refresherToken);
-
-          setCustomerAuth({ ...tokens });
+          setCustomerAuth({ ...customerAuth, ...tokens });
+          EncodeCookie({
+            customer: {},
+            tokens,
+            getCustomer: true
+          });
         }
       })
       .catch(() => setApiError(Constants.API_ERROR))

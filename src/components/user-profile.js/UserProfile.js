@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from './UserProfile.module.css';
-import useAuth from '../authorization/useAuth';
+import useAuth from '../../utils/hooks/useAuth';
 
 const UserProfile = () => {
   const { customerAuth } = useAuth();

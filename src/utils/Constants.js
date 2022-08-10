@@ -12,7 +12,13 @@ module.exports = Object.freeze({
   CUSTOMERS_ENDPOINT: '/customers',
   CUSTOMER_REGISTRATION_ENDPOINT: '/customers/register',
   CUSTOMER_LOG_IN_ENDPOINT: '/customers/login',
+  REFRESH_TOKEN_ENDPOINT: '/customers/refresh/token',
   // Regex
   NAME_REGEX: /^[a-z ,.'-]+$/i,
-  EMAIL_REGEX: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i
+  EMAIL_REGEX: /^[a-z0-9]+@[a-z]+\.[a-z]{2,3}$/i,
+  // Roles
+  ROLES: {
+    Admin: 1000,
+    Customer: 2000
+  }
 });

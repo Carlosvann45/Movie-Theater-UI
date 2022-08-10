@@ -5,7 +5,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import classes from './LoginPage.module.css';
 import RegistrationModal from '../registration-modal/RegistrationPage';
 import logInCustomer, { getCustomerInfo } from './LoginPageService';
-import useAuth from '../authorization/useAuth';
+import useAuth from '../../utils/hooks/useAuth';
 
 /**
  * @name LoginPage
@@ -14,7 +14,7 @@ import useAuth from '../authorization/useAuth';
 const LoginPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || '/account';
+  const path = location.state?.from?.pathname;
   const {
     customerAuth,
     setCustomerAuth
@@ -27,6 +27,10 @@ const LoginPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // decides what path to send to
+    const newPath = path && (path !== '/login') ? path : '/account';
+
+    // request to backend
     const loggedIn = await logInCustomer(signInCreds, customerAuth, setCustomerAuth, setApiError);
 
     if (loggedIn) {
@@ -35,7 +39,7 @@ const LoginPage = () => {
       );
 
       if (gotCustomer) {
-        navigate(from, { replace: true });
+        navigate(newPath, { replace: true });
       }
     }
   };

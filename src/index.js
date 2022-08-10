@@ -6,7 +6,7 @@ import {
 import './index.css';
 import App from './components/app/App';
 import LoadingSpinner from './components/loading-spinner/LoadingSpinner';
-import { AuthProvider } from './components/authorization/AuthContext';
+import { AuthProvider } from './utils/authorization/AuthContext';
 
 /**
  * Render App
